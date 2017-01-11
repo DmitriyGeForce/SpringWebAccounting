@@ -1,0 +1,73 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<table border="1">
+    <c:choose>
+        <c:when test="${selectedFilter.equals('Both')}">
+            <h4>Income</h4>
+        </c:when>
+    </c:choose>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Username</th>
+            <th>Type of action</th>
+            <th>Amount </th>
+            <th>Total amount</th>
+        </tr>
+    </thead>
+    <tbody>
+    <c:choose>
+        <c:when test="${!selectedFilter.equals('Both')}">
+            <c:forEach var="account" items="${Accounts}">
+                <tr>
+                    <td>${account.dateOfAction}</td>
+                    <td>${account.userId.username}</td>
+                    <td>${account.typeOfAction}</td>
+                    <td>${account.amount}</td>
+                    <td>${account.totalAmount}</td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <c:forEach var="account" items="${incomeList}">
+                <tr>
+                    <td>${account.dateOfAction}</td>
+                    <td>${account.userId.username}</td>
+                    <td>${account.typeOfAction}</td>
+                    <td>${account.amount}</td>
+                    <td>${account.totalAmount}</td>
+                </tr>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
+</tbody>
+</table>
+<c:choose>
+    <c:when test="${selectedFilter.equals('Both')}">
+        <br />
+        <h4>Expenses</h4>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Username</th>
+                    <th>Type of action</th>
+                    <th>Amount </th>
+                    <th>Total amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="account" items="${expenseList}">
+                <tr>
+                    <td>${account.dateOfAction}</td>
+                    <td>${account.userId.username}</td>
+                    <td>${account.typeOfAction}</td>
+                    <td>${account.amount}</td>
+                    <td>${account.totalAmount}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:when>  
+</c:choose> <hr />
